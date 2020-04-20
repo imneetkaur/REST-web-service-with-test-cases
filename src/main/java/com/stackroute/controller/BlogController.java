@@ -39,5 +39,10 @@ public class BlogController {
         responseEntity=new ResponseEntity<Blog>(blogService.deleteBlog(id), HttpStatus.OK);
         return responseEntity;
     }
+    @PutMapping("blog")
+    public ResponseEntity<?> updateBlog(@RequestBody Blog blog) {
 
+        Blog updatedBlog = blogService.updateBlog(blog);
+        return new ResponseEntity<>(updatedBlog, HttpStatus.OK);
+    }
 }

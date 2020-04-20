@@ -39,4 +39,12 @@ public class BlogServiceImpl implements BlogService {
         }
         return blog;
     }
+    public Blog updateBlog(Blog blog){
+        Blog getBlog = null;
+        if (blogRepository.existsById(blog.getBlogId())) {
+            getBlog = blogRepository.findById(blog.getBlogId()).get();
+            getBlog.setBlogContent(blog.getBlogContent());
+        }
+            return blogRepository.save(getBlog);
+    }
 }
