@@ -7,6 +7,6 @@ import java.util.List;
 public interface BlogService {
     public Blog saveBlog(Blog blog);
     public List<Blog> getAllBlogs();
-//    public Blog deleteBlog(int id);
+    public Blog deleteBlog(int id);
 //    public Blog updateBlog(int id);
 }

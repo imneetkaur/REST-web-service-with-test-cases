@@ -33,4 +33,11 @@ public class BlogController {
         responseEntity = new ResponseEntity<List<Blog>>((List<Blog>) blogService.getAllBlogs(), HttpStatus.FOUND);
         return responseEntity;
     }
+    @DeleteMapping("blog/{id}")
+    public ResponseEntity<?> getBlogAfterDeleting(@PathVariable int id) {
+        ResponseEntity responseEntity;
+        responseEntity=new ResponseEntity<Blog>(blogService.deleteBlog(id), HttpStatus.OK);
+        return responseEntity;
+    }
+
 }
