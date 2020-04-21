@@ -1,7 +1,7 @@
-package com.stackroute.controller;
+package com.stackroute.commander.test.controller;
 
 import com.stackroute.domain.Blog;
-import com.stackroute.service.BlogService;
+import com.stackroute.commander.test.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "api/v1")
+@RequestMapping(value = "/api/v1")
 public class BlogController {
 
     private BlogService blogService;
@@ -22,9 +22,8 @@ public class BlogController {
 
     @PostMapping("/blog")
     public ResponseEntity<?> saveBlog(@RequestBody Blog blog) {
-        ResponseEntity responseEntity;
         blogService.saveBlog(blog);
-        responseEntity = new ResponseEntity<String>("Successfully Created", HttpStatus.CREATED);
+        ResponseEntity responseEntity = new ResponseEntity<String>("Successfully Created", HttpStatus.CREATED);
         return responseEntity;
     }
 

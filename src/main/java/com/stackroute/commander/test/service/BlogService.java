@@ -1,4 +1,4 @@
-package com.stackroute.service;
+package com.stackroute.commander.test.service;
 import com.stackroute.domain.Blog;
 import java.util.List;
 
