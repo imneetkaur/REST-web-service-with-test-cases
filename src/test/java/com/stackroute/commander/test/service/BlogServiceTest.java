@@ -1,15 +1,17 @@
-package com.stackroute.RESTwebservice.commander.test.service;
+package com.stackroute.commander.test.service;
 
 import com.stackroute.domain.Blog;
-import com.stackroute.repository.BlogRepository;
-import com.stackroute.service.BlogServiceImpl;
+import com.stackroute.commander.test.repository.BlogRepository;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +19,8 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-
+@ExtendWith(MockitoExtension.class)
+@SpringBootTest
 class BlogServiceTest {
     @Mock
     private BlogRepository blogRepository;
@@ -41,14 +44,12 @@ class BlogServiceTest {
 
     @Test
     void saveBlog() {
-        when(blogRepository.findById(any())).thenReturn(Optional.empty());
         when(blogRepository.save(any())).thenReturn(blog);
         assertEquals(blog, blogService.saveBlog(blog));
-        verify(blogRepository, times(1)).findById(any());
         verify(blogRepository, times(1)).save(any());
     }
 
-    @Test
+
     void saveBlogFailure(){
         when(blogRepository.findById(any())).thenReturn(Optional.of(blog));
         assertThrows(Exception.class,() -> blogService.saveBlog(blog));
@@ -68,7 +69,6 @@ class BlogServiceTest {
         verify(blogRepository,times(1)).findAll();
     }
 
-    @Test
     void deleteBlog() {
         when(blogRepository.findById(blog.getBlogId())).thenReturn(optional);
         Blog deletedBlog=blogService.deleteBlog(1);
@@ -87,7 +87,7 @@ class BlogServiceTest {
         verify(blogRepository,times(1)).deleteById(blog.getBlogId());
     }
 
-    @Test
+
     void updateBlog() {
         when(blogRepository.findById(blog.getBlogId())).thenReturn(optional);
         blog.setBlogContent("new sample text");

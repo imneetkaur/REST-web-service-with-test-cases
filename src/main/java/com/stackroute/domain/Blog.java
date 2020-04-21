@@ -1,7 +1,11 @@
 package com.stackroute.domain;
 
-public class Blog {
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
+public class Blog {
+    @Id
     private int blogId;
     private String blogTitle;
     private String authorName;

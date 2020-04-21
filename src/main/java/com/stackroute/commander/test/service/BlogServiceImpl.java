@@ -1,7 +1,7 @@
-package com.stackroute.service;
+package com.stackroute.commander.test.service;
 
 import com.stackroute.domain.Blog;
-import com.stackroute.repository.BlogRepository;
+import com.stackroute.commander.test.repository.BlogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
