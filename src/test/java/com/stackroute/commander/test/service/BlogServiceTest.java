@@ -72,15 +72,15 @@ class BlogServiceTest {
         verify(blogRepository, times(1)).findAll();
     }
 
-//    @Test
-//    void deleteBlog() {
-//        when(blogRepository.findById(blog.getBlogId())).thenReturn(optional);
-//        Blog deletedBlog = blogService.deleteBlog(1);
-//        assertEquals(1, deletedBlog.getBlogId());
-//
-//        verify(blogRepository, times(2)).findById(blog.getBlogId());
-//        verify(blogRepository, times(1)).deleteById(blog.getBlogId());
-//    }
+    @Test
+    void deleteBlog() {
+        when(blogRepository.findById(blog.getBlogId())).thenReturn(optional);
+        Blog deletedBlog = blogService.deleteBlog(1);
+        assertEquals(1, deletedBlog.getBlogId());
+
+        verify(blogRepository, times(2)).findById(blog.getBlogId());
+        verify(blogRepository, times(1)).deleteById(blog.getBlogId());
+    }
 
 //    @Test
 //    void deleteBlogFailure() {
