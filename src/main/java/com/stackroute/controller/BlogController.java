@@ -1,7 +1,7 @@
-package com.stackroute.commander.test.controller;
+package com.stackroute.controller;
 
 import com.stackroute.domain.Blog;
-import com.stackroute.commander.test.service.BlogService;
+import com.stackroute.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

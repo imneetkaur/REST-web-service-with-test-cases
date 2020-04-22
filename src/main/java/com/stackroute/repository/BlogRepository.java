@@ -1,4 +1,4 @@
-package com.stackroute.commander.test.repository;
+package com.stackroute.repository;
 
 import com.stackroute.domain.Blog;
 import org.springframework.data.repository.CrudRepository;

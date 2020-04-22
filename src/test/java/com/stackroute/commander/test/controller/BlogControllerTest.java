@@ -1,7 +1,9 @@
 package com.stackroute.commander.test.controller;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.stackroute.controller.BlogController;
 import com.stackroute.domain.Blog;
-import com.stackroute.commander.test.service.BlogService;
+import com.stackroute.service.BlogService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -35,7 +37,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @ExtendWith(MockitoExtension.class)
 @SpringBootTest
-class BlogControllerTest {
+public class BlogControllerTest {
 
     private MockMvc mockMvc;
     @Mock
@@ -76,47 +78,51 @@ class BlogControllerTest {
         verify(blogService).saveBlog(any());
     }
 
-    public void saveBlogFailure() throws Exception {
-        when(blogService.saveBlog(any())).thenThrow(Exception.class);
-        mockMvc.perform(post("/api/v1/blog").contentType(MediaType.APPLICATION_JSON).content(asJsonString(blog)))
-                .andExpect(status().isConflict()).andDo(MockMvcResultHandlers.print());
+//    @Test
+//    public void saveBlogFailure() throws Exception {
+//        when(blogService.saveBlog(any())).thenThrow(Exception.class);
+//        mockMvc.perform(post("/api/v1/blog").contentType(MediaType.APPLICATION_JSON).content(asJsonString(blog)))
+//                .andExpect(status().isConflict()).andDo(MockMvcResultHandlers.print());
+//    }
 
-    }
-
-@Test
+    @Test
     void getAllBlogs() throws Exception {
         when(blogService.getAllBlogs()).thenReturn(blogList);
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/blogs")
                 .contentType(MediaType.APPLICATION_JSON).content(asJsonString(blog)))
                 .andDo(MockMvcResultHandlers.print());
-    verify(blogService).getAllBlogs();
-    verify(blogService, times(1)).getAllBlogs();
+        verify(blogService).getAllBlogs();
+        verify(blogService, times(1)).getAllBlogs();
 
-}
-
-
-    void getBlogAfterDeleting() throws Exception {
-        when(blogService.deleteBlog(blog.getBlogId())).thenReturn(blog);
-        mockMvc.perform(delete("/api/v1/blog/id").contentType(MediaType.APPLICATION_JSON).content(asJsonString(blog)))
-                .andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
     }
 
-    void getBlogAfterDeletingFailure() throws Exception{
-        when(blogService.deleteBlog(any())).thenThrow(Exception.class);
-        mockMvc.perform(delete("/api/v1/blog/id").contentType(MediaType.APPLICATION_JSON).content(asJsonString(blog)))
-                .andExpect(MockMvcResultMatchers.status().isConflict()).andDo(MockMvcResultHandlers.print());
-    }
+//    @Test
+//    void getBlogAfterDeleting() throws Exception {
+//        when(blogService.deleteBlog(blog.getBlogId())).thenReturn(blog);
+//        mockMvc.perform(delete("/api/v1/blog/id").contentType(MediaType.APPLICATION_JSON).content(asJsonString(blog)))
+//                .andExpect(MockMvcResultMatchers.status().isOk()).andDo(MockMvcResultHandlers.print());
+//    }
 
+//    @Test
+//    void getBlogAfterDeletingFailure() throws Exception {
+//        when(blogService.deleteBlog(any())).thenThrow(Exception.class);
+//        mockMvc.perform(delete("/api/v1/blog/id").contentType(MediaType.APPLICATION_JSON).content(asJsonString(blog)))
+//                .andExpect(MockMvcResultMatchers.status().isConflict()).andDo(MockMvcResultHandlers.print());
+//    }
+
+    @Test
     void updateBlog() throws Exception {
         when(blogService.updateBlog(any())).thenReturn(blog);
-        mockMvc.perform(put("/api/v1/blog/id").contentType(MediaType.APPLICATION_JSON).content(asJsonString(blog)))
+        mockMvc.perform(put("/api/v1/blog").contentType(MediaType.APPLICATION_JSON).content(asJsonString(blog)))
                 .andExpect(status().isOk()).andDo(MockMvcResultHandlers.print());
     }
-    void updateBlogFailure() throws Exception {
-        when(blogService.updateBlog(any())).thenThrow(Exception.class);
-        mockMvc.perform(put("/api/v1/blog/id").contentType(MediaType.APPLICATION_JSON).content(asJsonString(blog)))
-                .andExpect(status().isNotFound()).andDo(MockMvcResultHandlers.print());
-    }
+
+//    @Test
+//    void updateBlogFailure() throws Exception {
+//        when(blogService.updateBlog(any())).thenThrow(Exception.class);
+//        mockMvc.perform(put("/api/v1/blog/id").contentType(MediaType.APPLICATION_JSON).content(asJsonString(blog)))
+//                .andExpect(status().isNotFound()).andDo(MockMvcResultHandlers.print());
+//    }
 
     public static String asJsonString(final Object obj) {
         try {

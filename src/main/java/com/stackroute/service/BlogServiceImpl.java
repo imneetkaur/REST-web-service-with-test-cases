@@ -1,7 +1,8 @@
-package com.stackroute.commander.test.service;
+package com.stackroute.service;
 
 import com.stackroute.domain.Blog;
-import com.stackroute.commander.test.repository.BlogRepository;
+
+import com.stackroute.repository.BlogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,12 +40,13 @@ public class BlogServiceImpl implements BlogService {
         }
         return blog;
     }
+
     public Blog updateBlog(Blog blog){
         Blog getBlog = null;
         if (blogRepository.existsById(blog.getBlogId())) {
             getBlog = blogRepository.findById(blog.getBlogId()).get();
             getBlog.setBlogContent(blog.getBlogContent());
         }
-            return blogRepository.save(getBlog);
+        return blogRepository.save(getBlog);
     }
 }
