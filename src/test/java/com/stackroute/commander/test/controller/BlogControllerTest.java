@@ -78,12 +78,12 @@ public class BlogControllerTest {
         verify(blogService).saveBlog(any());
     }
 
-//    @Test
-//    public void saveBlogFailure() throws Exception {
-//        when(blogService.saveBlog(any())).thenThrow(Exception.class);
-//        mockMvc.perform(post("/api/v1/blog").contentType(MediaType.APPLICATION_JSON).content(asJsonString(blog)))
-//                .andExpect(status().isConflict()).andDo(MockMvcResultHandlers.print());
-//    }
+    @Test
+    public void saveBlogFailure() throws Exception {
+        when(blogService.saveBlog(any())).thenThrow(Exception.class);
+        mockMvc.perform(post("/api/v1/blog").contentType(MediaType.APPLICATION_JSON).content(asJsonString(blog)))
+                .andExpect(status().isConflict()).andDo(MockMvcResultHandlers.print());
+    }
 
     @Test
     void getAllBlogs() throws Exception {
