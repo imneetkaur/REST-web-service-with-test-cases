@@ -41,12 +41,16 @@ public class BlogServiceImpl implements BlogService {
         return blog;
     }
 
-    public Blog updateBlog(Blog blog){
-        Blog getBlog = null;
-        if (blogRepository.existsById(blog.getBlogId())) {
-            getBlog = blogRepository.findById(blog.getBlogId()).get();
+    public Blog updateBlog(Blog blog) {
+        Blog updatedBlog = null;
+        Optional optional = blogRepository.findById(blog.getBlogId());
+        if (optional.isPresent()) {
+            Blog getBlog = blogRepository.findById(blog.getBlogId()).get();
             getBlog.setBlogContent(blog.getBlogContent());
+            updatedBlog = saveBlog(getBlog);
+            System.out.println(updatedBlog);
         }
-        return blogRepository.save(getBlog);
+        return updatedBlog;
     }
 }
+
